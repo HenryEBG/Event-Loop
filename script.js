@@ -23,18 +23,13 @@ try {
  * Usin Trampoline to 
  */
 
-const trampoline = (f, ...args) => {
-  let result = f(...args);
-  while (typeof result === "function") {
-    result = result();
-  }
-  return result;
-}
 
 //example array
 let unflattenArray=[1,2,3,['a','b',[1.2,2.3,['hello','cruel','world'],3.5]],6,7]
 //empty array
 let flattenArray=[]
+
+
 
 // //recursive function that flat an array
 // function unFlattingArray(index,nextArray){
@@ -52,7 +47,7 @@ let flattenArray=[]
 // console.log(flattenArray)
 
 
- flattenArray=[]
+//  flattenArray=[]
 
  //changing to a control recursive function
 function unFlattingArray(n,index,nextArray){
@@ -67,6 +62,17 @@ function unFlattingArray(n,index,nextArray){
 }
 
 //trying the unflatting function
-unFlattingArray(3,0,unflattenArray)
-console.log(flattenArray)
+//unFlattingArray(3,0,unflattenArray)
+//console.log(flattenArray)
 
+const trampoline = (f, ...args) => {
+  let result = f(...args);
+  while (typeof result === "function") {
+    result = result();
+  }
+  return result;
+}
+
+trampoline(unFlattingArray,2,0,unflattenArray)
+
+console.log(flattenArray)
