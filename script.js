@@ -1,8 +1,7 @@
-/**
+/************************************************************
  *  PART 1
  *  Find the overflow stack and print the error and number
- */
-
+ ***********************************************************/
 
 let count=0
 try {
@@ -18,10 +17,10 @@ try {
 
 }
 
-/**
+/********************************************************************************
  * PART 2
- * Usin Trampoline to 
- */
+ * Usin Trampoline to execute a recursive function controlled
+ *******************************************************************************/
 
 
 //example array
@@ -30,6 +29,10 @@ let unflattenArray=[1,2,3,['a','b',[1.2,2.3,['hello','cruel','world'],3.5]],6,7]
 let flattenArray=[]
 
 
+/************************************************************ 
+ * Functuion to flat a funtion recursivelly without control
+ * uncomment to try it
+*************************************************************/
 
 // //recursive function that flat an array
 // function unFlattingArray(index,nextArray){
@@ -49,6 +52,13 @@ let flattenArray=[]
 
 //  flattenArray=[]
 
+/*************************************************************************
+ * Function to be use by the trampoline function with a control counter
+ * @param {*} n control counter
+ * @param {*} index pointer of the next element of the array
+ * @param {*} nextArray array to be unflat
+ * @returns 
+ */
  //changing to a control recursive function
 function unFlattingArray(n,index,nextArray){
   if(n===0) return
@@ -65,6 +75,13 @@ function unFlattingArray(n,index,nextArray){
 //unFlattingArray(3,0,unflattenArray)
 //console.log(flattenArray)
 
+
+/**
+ * Trampoline function
+ * @param {*} f function to be controled
+ * @param  {...any} args  args of the function
+ * @returns 
+ */
 const trampoline = (f, ...args) => {
   let result = f(...args);
   while (typeof result === "function") {
