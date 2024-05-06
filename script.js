@@ -31,18 +31,42 @@ const trampoline = (f, ...args) => {
   return result;
 }
 
-unflattenArray=[1,2,3,['a','b',[1.2,2.3['hello','cruel','world',[{name:'Henry',lastName:'Berganza'},{name:'Mario',lastName:'Baracus'}]],3.5]],6,7]
-flattenArray=[]
+//example array
+let unflattenArray=[1,2,3,['a','b',[1.2,2.3,['hello','cruel','world'],3.5]],6,7]
+//empty array
+let flattenArray=[]
 
-function unFlattingArray(index,nextArray){
+// //recursive function that flat an array
+// function unFlattingArray(index,nextArray){
+//   if(index>=nextArray.length) return
+//   if(Array.isArray(nextArray[index])){
+//     unFlattingArray(0,nextArray[index])
+//   } else {
+//     flattenArray.push(nextArray[index])
+//   }
+//   unFlattingArray(index+1,nextArray)
+// }
+
+// //trying the unflatting function
+// unFlattingArray(0,unflattenArray)
+// console.log(flattenArray)
+
+
+ flattenArray=[]
+
+ //changing to a control recursive function
+function unFlattingArray(n,index,nextArray){
+  if(n===0) return
   if(index>=nextArray.length) return
   if(Array.isArray(nextArray[index])){
-    unFlattingArray(0,nextArray[index])
+    unFlattingArray(n-1,0,nextArray[index])
   } else {
     flattenArray.push(nextArray[index])
   }
-  unFlattingArray(index+1,nextArray)
+  unFlattingArray(n,index+1,nextArray)
 }
 
-unFlattingArray(0,unflattenArray)
+//trying the unflatting function
+unFlattingArray(3,0,unflattenArray)
 console.log(flattenArray)
+
